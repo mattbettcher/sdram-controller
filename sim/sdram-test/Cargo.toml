@@ -1,0 +1,10 @@
+[package]
+name = "sdram-test"
+version = "0.1.0"
+authors = ["Matthew Bettcher <mattbettcher@gmail.com>"]
+
+[lib]
+name = "sdram_test"
+crate-type = ["dylib"]
+
+[dependencies]

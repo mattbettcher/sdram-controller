@@ -1,0 +1,11 @@
+obj_dir/
+trace/
+/target/
+Cargo.lock
+db/
+incremental_db/
+output_files/
+fizzim/*.jar 
+fizzim/*.pdf
+fizzim/*.log
+fizzim/*.pl
