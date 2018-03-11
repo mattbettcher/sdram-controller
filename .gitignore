@@ -1,6 +1,6 @@
 obj_dir/
 trace/
-/target/
+target/
 Cargo.lock
 db/
 incremental_db/
@@ -9,3 +9,4 @@ fizzim/*.jar
 fizzim/*.pdf
 fizzim/*.log
 fizzim/*.pl
+.vscode/

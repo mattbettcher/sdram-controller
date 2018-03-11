@@ -29,10 +29,10 @@ SDRAM_TEST=$(SDRAM_TEST_DIR)/target/release/$(DYNAMIC_LIB_PREFIX)sdram_test$(DYN
 SDRAM_TRACE=$(TRACE_DIR)/sdram_test.vcd
 
 VERILATOR=verilator
-VERILATOR_FLAGS=-Wall -Wno-fatal -O3 --x-assign fast --noassert -CFLAGS "-O3 -std=c++11" --trace
+VERILATOR_FLAGS=-Wall -Wno-fatal -O3 --x-assign fast --noassert -CFLAGS "-O3 -std=c++11" --trace --sv
 
 FIZZIM=perl
-FIZZIM_FLAGS=#$-language SystemVerilog
+FIZZIM_FLAGS=-language SystemVerilog
 
 RM=rm
 RM_FLAGS=-rf
@@ -41,13 +41,10 @@ RM_FLAGS=-rf
 
 all: dirs $(SDRAM_DRIVER) $(SDRAM_TEST)
 
-dirs: $(OBJ_DIR) $(TRACE_DIR)
+dirs: $(OBJ_DIR)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
-
-$(TRACE_DIR):
-	mkdir -p $(TRACE_DIR)
 
 fizzim: $(SDRAM_SM)
 	$(PERL) fizzim/fizzim.pl < $(SDRAM_SM) > $(SDRAM_DRIVER_RTL) $(FIZZIM_FLAGS)
@@ -65,5 +62,5 @@ test: dirs $(SDRAM_DRIVER) $(SDRAM_TEST)
 clean:
 	$(RM) $(RM_FLAGS) $(SDRAM_DRIVER_RTL)
 	$(RM) $(RM_FLAGS) $(OBJ_DIR)
-	$(RM) $(RM_FLAGS) $(TRACE_DIR)
+	$(RM) $(RM_FLAGS) $(TRACE_DIR)/*.vcd
 	cd $(SDRAM_TEST_DIR) && cargo clean

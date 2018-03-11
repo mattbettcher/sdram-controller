@@ -13,14 +13,37 @@ using namespace std;
 
 typedef struct
 {
-    uint32_t (*get_reset_n)();
-    void (*set_reset_n)(uint32_t value);
+    
+    // clk
     uint32_t (*get_clk)();
     void (*set_clk)(uint32_t value);
-    uint32_t (*get_inc)();
-    void (*set_inc)(uint32_t value);
-    uint32_t (*get_count)();
-    void (*set_count)(uint32_t value);
+    // bank address
+    uint32_t (*get_ba)();
+    void (*set_ba)(uint32_t value);
+    // cas
+    uint32_t (*get_cas_n)();
+    void (*set_cas_n)(uint32_t value);
+    // cs_n
+    uint32_t (*get_cs_n)();
+    void (*set_cs_n)(uint32_t value);
+    // dqmh
+    uint32_t (*get_dqmh)();
+    void (*set_dqmh)(uint32_t value);
+    // dqml
+    uint32_t (*get_dqml)();
+    void (*set_dqml)(uint32_t value);
+    // ras
+    uint32_t (*get_ras_n)();
+    void (*set_ras_n)(uint32_t value);
+    // we_n
+    uint32_t (*get_we_n)();
+    void (*set_we_n)(uint32_t value);
+    // reset
+    uint32_t (*get_rst_n)();
+    void (*set_rst_n)(uint32_t value);
+    // address
+    uint32_t (*get_addr)();
+    void (*set_addr)(uint32_t value);
 
     void (*eval)();
     void (*final)();
@@ -29,16 +52,6 @@ typedef struct
 
 static Vsdram *top;
 static VerilatedVcdC *trace = nullptr;
-
-uint32_t get_reset_n()
-{
-    return top->reset_n;
-}
-
-void set_reset_n(uint32_t value)
-{
-    top->reset_n = value;
-}
 
 uint32_t get_clk()
 {
@@ -50,24 +63,94 @@ void set_clk(uint32_t value)
     top->clk = value;
 }
 
-uint32_t get_inc()
+uint32_t get_ba()
 {
-    return top->inc;
+    return top->ba;
 }
 
-void set_inc(uint32_t value)
+void set_ba(uint32_t value)
 {
-    top->inc = value;
+    top->ba = value;
 }
 
-uint32_t get_count()
+uint32_t get_cas_n()
 {
-    return top->count;
+    return top->cas_n;
 }
 
-void set_count(uint32_t value)
+void set_cas_n(uint32_t value)
 {
-    top->count = value;
+    top->cas_n = value;
+}
+
+uint32_t get_cs_n()
+{
+    return top->cs_n;
+}
+
+void set_cs_n(uint32_t value)
+{
+    top->cs_n = value;
+}
+
+uint32_t get_dqmh()
+{
+    return top->dqmh;
+}
+
+void set_dqmh(uint32_t value)
+{
+    top->dqmh = value;
+}
+
+uint32_t get_dqml()
+{
+    return top->dqml;
+}
+
+void set_dqml(uint32_t value)
+{
+    top->dqml = value;
+}
+
+uint32_t get_ras_n()
+{
+    return top->ras_n;
+}
+
+void set_ras_n(uint32_t value)
+{
+    top->ras_n = value;
+}
+
+uint32_t get_we_n()
+{
+    return top->we_n;
+}
+
+void set_we_n(uint32_t value)
+{
+    top->we_n = value;
+}
+
+uint32_t get_rst_n()
+{
+    return top->rst_n;
+}
+
+void set_rst_n(uint32_t value)
+{
+    top->rst_n = value;
+}
+
+uint32_t get_addr()
+{
+    return top->addr;
+}
+
+void set_addr(uint32_t value)
+{
+    top->addr = value;
 }
 
 void eval()
@@ -131,17 +214,35 @@ int main(int argc, char **argv)
 
     Env env =
     {
-        .get_reset_n = get_reset_n,
-        .set_reset_n = set_reset_n,
-
         .get_clk = get_clk,
         .set_clk = set_clk,
+        
+        .get_ba = get_ba,
+        .set_ba = set_ba,
 
-        .get_inc = get_inc,
-        .set_inc = set_inc,
+        .get_cas_n = get_cas_n,
+        .set_cas_n = set_cas_n,
 
-        .get_count = get_count,
-        .set_count = set_count,
+        .get_cs_n = get_cs_n,
+        .set_cs_n = set_cs_n,
+
+        .get_dqmh = get_dqmh,
+        .set_dqmh = set_dqmh,
+
+        .get_dqml = get_dqml,
+        .set_dqml = set_dqml,
+
+        .get_ras_n = get_ras_n,
+        .set_ras_n = set_ras_n,
+
+        .get_we_n = get_we_n,
+        .set_we_n = set_we_n,
+
+        .get_rst_n = get_rst_n,
+        .set_rst_n = set_rst_n,
+
+        .get_addr = get_addr,
+        .set_addr = set_addr,
 
         .eval = eval,
         .final = final,
